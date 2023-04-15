@@ -84,22 +84,78 @@ circle2 -= 1
 print(circle2)
 
 
-
-# print(circle1.circumference)
-# print(circle2.circumference)
-
 # Задание 2
 # Создайте класс Complex (комплексное число). Более
 # подробно ознакомиться с комплексными числами можно
 # по ссылке.
 # Создайте перегруженные операторы для реализации
-# арифметических операций для по работе с комплексными
+# арифметических операций по работе с комплексными
 # числами (операции +, -, *, /).
 #
 # Решение:
 
+class Complex:
+    def __init__(self, real, imaginary):
+        self.real = real
+        self.imaginary = imaginary
 
+    def __add__(self, other):
+        print(f'{self.real + other.real} + ({self.imaginary + other.imaginary}) * i')
+        return Complex(self.real + other.real,
+                       self.imaginary + other.imaginary)
+    def __radd__(self, other):
+        return
 
+    def __sub__(self, other):
+        print(f'{self.real - other.real} + ({self.imaginary - other.imaginary}) * i')
+        return Complex(self.real - other.real,
+                       self.imaginary - other.imaginary)
+    def __rsub__(self, other):
+        return self.__sub__(other)
+
+    def __mul__(self, other):
+        print(f'{self.real * other.real - self.imaginary * other.imaginary}'
+              f' + ({self.real * other.imaginary + self.imaginary * other.real}) * i')
+        return Complex(self.real * other.real - self.imaginary * other.imaginary,
+                       self.real * other.imaginary + self.imaginary * other.real)
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __truediv__(self, other):
+        print(f'{(self.real * other.real + self.imaginary * other.imaginary) / (other.real ** 2 + other.imaginary ** 2)}'
+              f' + ({(self.imaginary * other.real - self.real * other.imaginary) / (other.real ** 2 + other.imaginary ** 2)}) * i')
+        return Complex((self.real * other.real + self.imaginary * other.imaginary) /
+                       (other.real ** 2 + other.imaginary ** 2),
+                       (self.imaginary * other.real - self.real * other.imaginary) /
+                       (other.real ** 2 + other.imaginary ** 2))
+
+# для простоты возьмём комплексно-сопряжённые числа
+complex_num1 = Complex(1, 1)
+complex_num2 = Complex(1, -1)
+
+print()
+print('Результат сложения двух комплексных чисел (2 способа вывода):')
+complex_num3 = complex_num1 + complex_num2
+# либо
+print(f'{complex_num3.real} + ({complex_num3.imaginary}) * i')
+
+print()
+print('Результат вычитания двух комплексных чисел (2 способа вывода):')
+complex_num3 = complex_num1 - complex_num2
+# либо
+print(f'{complex_num3.real} + ({complex_num3.imaginary}) * i')
+
+print()
+print('Результат умножения двух комплексных чисел (2 способа вывода):')
+complex_num3 = complex_num1 * complex_num2
+# либо
+print(f'{complex_num3.real} + ({complex_num3.imaginary}) * i')
+
+print()
+print('Результат деления двух комплексных чисел (2 способа вывода):')
+complex_num3 = complex_num1 / complex_num2
+# либо
+print(f'{complex_num3.real} + ({complex_num3.imaginary}) * i')
 
 
 
