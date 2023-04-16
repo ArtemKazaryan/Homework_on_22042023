@@ -68,9 +68,9 @@ print(circle1 == circle3)
 print()
 print('Сравнения длин двух окружностей:')
 print(circle1 > circle2)
-print(circle2 > circle1)
-print(circle1 >= circle2)
-print(circle2 >= circle1)
+print(circle1 < circle2)
+print(circle1 >= circle3)
+print(circle2 <= circle1)
 
 print()
 print('Пропорциональное изменение размеров окружности, путём изменения ее радиуса:')
@@ -167,8 +167,91 @@ print(f'{complex_num3.real} + ({complex_num3.imaginary}) * i')
 # ■ Увеличение и уменьшение пассажиров в салоне самолета (операции + - += -=);
 # ■ Сравнение двух самолетов по максимально возможному количеству пассажиров на борту (операции >
 # < <= >=).
-#
+
+
 # Решение:
+
+class Airplane:
+    def __init__(self, airplane_type, pass_num, pass_capacity):
+        self.airplane_type = airplane_type
+        self.pass_num = pass_num
+        self.pass_capacity = pass_capacity
+
+    def __eq__(self, other):
+        return self.airplane_type == other.airplane_type
+
+    def __add__(self, other):
+        if self.pass_num + other <= 0:
+            return 0
+        if self.pass_num + other <= self.pass_capacity:
+            return self.pass_num + other
+        else:
+            print()
+            print('Количество пассажиров не может быть больше вместимости!!! Изменения не выполнены!!!')
+            return self.pass_num
+    def __radd__(self, other):
+        return self.__add__(other)
+    def __iadd__(self, other):
+        self.pass_num += other
+        if self.pass_num <= 0:
+            return 0
+        if self.pass_num <= self.pass_capacity:
+            return self.pass_num
+        else:
+            print()
+            print('Количество пассажиров не может быть больше вместимости!!! Изменения не выполнены!!!')
+            self.pass_num -= other
+            return self.pass_num
+
+    def __sub__(self, other):
+        if self.pass_num - other <= 0:
+            return 0
+        else:
+            return self.pass_num
+    def __rsub__(self, other):
+        return self.__sub__(other)
+    def __isub__(self, other):
+        self.pass_num -= other
+        if self.pass_num <= 0:
+            return 0
+        else:
+            return self.pass_num
+
+    def __gt__(self, other):
+        return self.pass_capacity > other
+    def __lt__(self, other):
+        return self.pass_capacity < other
+    def __ge__(self, other):
+        return self.pass_capacity >= other
+    def __le__(self, other):
+        return self.pass_capacity <= other
+
+airplane1 = Airplane('Военный', 10, 15)
+airplane2 = Airplane('Гражданский', 100, 200)
+airplane3 = Airplane('Гражданский', 50, 200)
+
+print()
+print('Проверка на равенство типов самолетов:')
+print(airplane1 == airplane2)
+print(airplane2 == airplane3)
+
+print()
+print('Увеличение и уменьшение пассажиров в салоне самолета:')
+summ = airplane1 + 2
+print(summ)
+subs = airplane2 - 5
+print(subs)
+airplane2 += 4
+print(airplane2)
+airplane3 -= 5
+print(airplane3)
+
+print()
+print('Сравнение двух самолетов по максимально возможному количеству пассажиров на борту:')
+print(airplane1 > airplane2)
+print(airplane1 < airplane2)
+print(airplane2 >= airplane3)
+print(airplane1 <= airplane3)
 
 
 
