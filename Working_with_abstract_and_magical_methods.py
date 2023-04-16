@@ -9,7 +9,7 @@
 # Модуль 10. Объектно-ориентированное
 # программирование
 #
-# Тема: Статические методы
+# Тема: Перегрузка операторов. Часть 5
 
 # Задание 1
 # Создайте класс Circle (окружность). Для данного
@@ -22,6 +22,10 @@
 # путем изменения ее радиуса (операции + - += -=).
 #
 # Решение:
+print()
+print('-'*49)
+print('*'*11, 'РЕЗУЛЬТАТЫ ПО ЗАДАНИЮ №1:', '*'*11)
+
 from math import pi
 class Circle:
     def __init__(self, radius):
@@ -84,6 +88,7 @@ circle2 -= 1
 print(circle2)
 
 
+
 # Задание 2
 # Создайте класс Complex (комплексное число). Более
 # подробно ознакомиться с комплексными числами можно
@@ -93,6 +98,9 @@ print(circle2)
 # числами (операции +, -, *, /).
 #
 # Решение:
+print()
+print('-'*49)
+print('*'*11, 'РЕЗУЛЬТАТЫ ПО ЗАДАНИЮ №2:', '*'*11)
 
 class Complex:
     def __init__(self, real, imaginary):
@@ -168,8 +176,10 @@ print(f'{complex_num3.real} + ({complex_num3.imaginary}) * i')
 # ■ Сравнение двух самолетов по максимально возможному количеству пассажиров на борту (операции >
 # < <= >=).
 
-
 # Решение:
+print()
+print('-'*49)
+print('*'*11, 'РЕЗУЛЬТАТЫ ПО ЗАДАНИЮ №3:', '*'*11)
 
 class Airplane:
     def __init__(self, airplane_type, pass_num, pass_capacity):
@@ -255,8 +265,6 @@ print(airplane1 <= airplane3)
 
 
 
-
-
 # Задание 4
 # Создать класс Flat (квартира). Реализовать перегруженные операторы:
 # ■ Проверка на равенство площадей квартир (операция
@@ -265,3 +273,46 @@ print(airplane1 <= airplane3)
 # ■ Сравнение двух квартир по цене (операции > < <= >=).
 #
 # Решение:
+print()
+print('-'*49)
+print('*'*11, 'РЕЗУЛЬТАТЫ ПО ЗАДАНИЮ №4:', '*'*11)
+
+class Flat:
+    def __init__(self, area, price):
+        self.area = area
+        self.price = price
+
+    def __eq__(self, other):
+        return self.area == other.area
+    def __ne__(self, other):
+        return self.area != other.area
+
+    def __gt__(self, other):
+        return self.price > other
+    def __lt__(self, other):
+        return self.price < other
+    def __ge__(self, other):
+        return self.price >= other
+    def __le__(self, other):
+        return self.price <= other
+
+flat1 = Flat(70, 3500000)
+flat2 = Flat(50, 3000000)
+flat3 = Flat(50, 2500000)
+
+print()
+print('Проверка на равенство площадей квартир:')
+print(flat2 == flat3)
+print(flat1 == flat2)
+
+print()
+print('Проверка на неравенство площадей квартир:')
+print(flat2 != flat3)
+print(flat1 != flat2)
+
+print()
+print('Сравнение двух квартир по цене:')
+print(flat1 > flat2)
+print(flat1 < flat2)
+print(flat2 >= flat3)
+print(flat1 <= flat3)
